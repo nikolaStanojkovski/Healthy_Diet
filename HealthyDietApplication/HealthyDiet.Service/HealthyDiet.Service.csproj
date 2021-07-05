@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="Implementation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HealthyDiet.Domain\HealthyDiet.Domain.csproj" />
+    <ProjectReference Include="..\HealthyDiet.Repository\HealthyDiet.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
