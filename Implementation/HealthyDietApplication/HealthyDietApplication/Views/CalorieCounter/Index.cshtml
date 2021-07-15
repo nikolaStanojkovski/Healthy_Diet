@@ -1,0 +1,231 @@
+﻿@model HealthyDiet.Domain.DTO.CalorieCounterDTO
+
+@{
+    ViewData["Title"] = "Diet Plans Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Required imports -->
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="~/custom/js/bootstrap.js"></script>
+<link rel="stylesheet" href="~/custom/fontawesome/css/all.css" />
+
+<script>
+
+    // Delete whole row from table
+    function deleteRow(ref) {
+        tr = ref.parentNode.parentNode;
+        tr.parentNode.removeChild(tr);
+    }
+
+    // Clear the whole table
+    function clearTable(ref) {
+        $("#victualTable tbody tr").each(function () {
+            tr = this;
+            tr.parentNode.removeChild(tr);
+        });
+    }
+
+    $(document).ready(function () {
+
+        // Insert victual into table
+        $("#buttonAdd").click(function () {
+
+            var victualId = $("#victualSelect").children("option:selected").val();
+            var victualName = $("#victualSelect").children("option:selected").attr('victualName');
+            var victualType = $("#victualSelect").children("option:selected").attr('victualType');
+            var victualCalories = $("#victualSelect").children("option:selected").attr('victualCalories');
+            var quantity = $("#quantity").val();
+
+            // Check for already existing victual in table to increase quantity
+            var exists = false;
+            $("#victualTable tbody tr").each(function () {
+                var victualIdCheck = $(this).attr('victualid');
+
+                if (victualIdCheck == victualId) {
+                    exists = true;
+                    var currentQuantity = parseInt($(this).find('.quantityTable').html()) + parseInt(quantity);
+                    $(this).find('.quantityTable').html(currentQuantity);
+                }
+            });
+
+            if (victualId !== 0 && exists == false) {
+                var deleteButton = "<td><button type='button' class='btn btn-danger' onclick='deleteRow(this);'><i class='fas fa-trash-alt'></i></button></td>";
+                $("#tableBody").append("<tr victualId='" + victualId + "' victualCalories='" + victualCalories + "'><td>" + victualName + "</td><td>" + victualType + "</td><td class='quantityTable'>" + quantity + "</td>" + deleteButton + "</tr>");
+            }
+
+            $("#victualSelect").val(0);
+            $("#quantity").val(0);
+        });
+
+        // Calculate number of calories
+        $("#buttonCalculate").click(function () {
+            var sum = 0.0;
+            $("#victualTable tbody tr").each(function () {
+                var currentVictualCalories = parseInt($(this).attr('victualcalories'));
+                var currentVictualQuantity = parseInt($(this).find('.quantityTable').html());
+                sum += (currentVictualCalories * currentVictualQuantity);
+            });
+
+            $("#spanCalories").html("<h1 class='lead font-weight-bold'><b>" + sum + "</b> kcal</h2>");
+        });
+
+    });
+
+</script>
+
+<div class="container my-4">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="row">
+                    <div class="col-12 ">
+                        <h2 class="card-header font-weight-normal text-center py-3">Calorie Calculator</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-body">
+                            <div class="form-group mx-4">
+                                <div class="row mt-3">
+                                    <div class="col-4 text-center">
+                                        <span class="lead">Select your victual with the quantity: </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <select id="victualSelect" class="form-control">
+                                            <option value="0" selected disabled>Select your victual</option>
+                                            @foreach (var victual in Model.AllVictuals)
+                                            {
+                                                <option victualCalories="@victual.NumberCalories" victualName="@victual.Name" victualType="@victual.Type" value="@victual.Id">
+                                                    @victual.Name
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <input id="quantity" name="quantity" class="form-control" value="0" type="number" min="1" max="50" />
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <button id="buttonAdd" name="buttonAdd" type="button" class="btn btn-success btn-block">
+                                            &nbsp; &nbsp; &nbsp;<i class="fa fa-plus"></i> &nbsp; &nbsp; &nbsp;
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-5">
+                        <hr class="w-100 text-success mx-auto" style="height: 5px;" />
+                    </div>
+
+                    <div class="col-2">
+                        <h3 class="text-center lead">OR</h3>
+                    </div>
+
+                    <div class="col-5">
+                        <hr class="w-100 text-success mx-auto" style="height: 5px;" />
+                    </div>
+                </div>
+                <div class="row mx-5">
+                    <div class="col my-4 text-center mx-3">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#accountStatistics">Take from Account Statistcs</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="accountStatistics" tabindex="-1" role="dialog" aria-labelledby="accountStatisticsTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="accountStatisticsTitle">Take victals from account statistics</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to take the list of victuals from account statistics? If so, do you want to take them from today, or from all time consumation?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a asp-controller="CalorieCounter" asp-action="TakeFromAccountToday" class="btn btn-primary">From Today</a>
+                                            <a asp-controller="CalorieCounter" asp-action="TakeFromAccountAllTime" class="btn btn-info">From All Time</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-block btn-primary disabled">Take from Account Statistcs</a>
+                        }
+
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-12">
+                        <hr class="w-100 h-100" style="height: 15px;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <table id="victualTable" class="table table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Vcitual Name</th>
+                                    <th scope="col">Victual Type</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                @{
+                                    if (Model.UserVictuals != null && Model.UserVictuals.Count != 0)
+                                    {
+                                        foreach (var victual in Model.UserVictuals)
+                                        {
+                                            <tr victualId="@victual.Id" victualCalories="@victual.Victual.NumberCalories">
+                                                <td>@victual.Victual.Name</td>
+                                                <td>@victual.Victual.Type</td>
+                                                <td class="quantityTable">@victual.Quantity</td>
+                                                <td>
+                                                    <button type='button' class='btn btn-danger' onclick='deleteRow(this);'><i class='fas fa-trash-alt'></i></button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <button onclick="clearTable(this);" type="button" class="btn btn-outline-danger mt-2 btn-block">Clear Table</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button id="buttonCalculate" type="button" class="btn btn-success btn-block">
+            <h3>
+                Calculate &nbsp;<i class="fa fa-play" style="font-size:17px;"></i>
+            </h3>
+        </button>
+    </div>
+
+    <hr class="w-100 text-secondary my-4" />
+
+    <div class="row mt-1">
+        <div class="col-12">
+            <div class="card text-center text-white" style="border-width: 3px; background-color: #8dba8d;">
+                <h2 class="card-header font-weight-normal text-center py-3"  style="border-width: 3px;">Result</h2>
+                <div class="card-body">
+                    <span id="spanCalories" class="my-4">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

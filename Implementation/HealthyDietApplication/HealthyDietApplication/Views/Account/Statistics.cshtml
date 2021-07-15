@@ -1,0 +1,439 @@
+﻿@model HealthyDiet.Domain.Identity.UserSettingsDto
+
+@{
+    ViewData["Title"] = "User Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.ValidationSummary()
+
+    <div class="container px-5 my-5 pb-5" style="border-radius: 10px;">
+
+        <div class="row mb-5">
+            <div class="col text-center" style="color: #89c540;">
+                <h1 class="lead display-4 font-weight-light">User Statistics</h1>
+            </div>
+        </div>
+
+        <h4 style="color: #89c540;">Water Intake</h4>
+        <hr class="w-100 text-secondary mt-4 mb-5" />
+
+        <!-- Water Intake -->
+
+        <form asp-action="StatisticsWaterUpdate" asp-controller="Account" method="post">
+
+            <!-- Required daily Intake -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Required Daily Intake</b>
+                </div>
+                <div class="col-7">
+                    <div style="height: 20px;">
+                        <b style="font-size: 18px;">@Math.Round(Model.CurrentWaterDay.RequiredQuantity, 2) litres</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Intake -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Daily progress</b>
+                </div>
+                <div class="col-7">
+                    <div class="progress" style="height: 20px;">
+                        @{
+                            int value = 0;
+                            double quantity = Math.Round(Model.CurrentWaterDay.Quantity, 2);
+                            if (Model.CurrentWaterDay.Quantity != 0)
+                                value = (int)(((Model.CurrentWaterDay.Quantity * 1.0) / (Model.CurrentWaterDay.RequiredQuantity * 1.0)) * 100.00);
+                            if (value > 100)
+                                value = 100;
+                        }
+                        <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @value%;" aria-valuenow="@value" aria-valuemin="0" aria-valuemax="100">@value %</div>
+                    </div>
+                </div>
+                <div class="col-2 text-right">
+                    <b>@quantity liters</b>
+                </div>
+            </div>
+
+            <!-- Weekly Intake -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Weekly progress</b>
+                </div>
+                <div class="col-7">
+                    <div class="progress" style="height: 20px;">
+                        @{
+                            double weeklyPossibleQuantity = 0.0;
+                            double weeklyRequiredQuantity = 0.0;
+
+                            int weeklyValue = 0;
+                            if (Model.WeeklyWaterIntake.Count != 0)
+                            {
+                                foreach (var water in Model.WeeklyWaterIntake)
+                                {
+                                    if (water != null)
+                                    {
+                                        weeklyPossibleQuantity += water.Quantity;
+                                        weeklyRequiredQuantity += water.RequiredQuantity;
+                                    }
+                                }
+                            }
+
+                            if (weeklyPossibleQuantity != 0 && weeklyRequiredQuantity != 0)
+                            {
+                                weeklyValue = (int)(((weeklyPossibleQuantity * 1.0) / (weeklyRequiredQuantity * 1.0)) * 100.00);
+                                if (weeklyValue > 100)
+                                    weeklyValue = 100;
+                            }
+                            double weeklyQuantity = Math.Round(weeklyPossibleQuantity, 2);
+                        }
+                        <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @weeklyValue%;" aria-valuenow="@weeklyValue" aria-valuemin="0" aria-valuemax="100">@weeklyValue %</div>
+                    </div>
+                </div>
+                <div class="col-2 text-right">
+                    <b>@weeklyQuantity liters</b>
+                </div>
+            </div>
+
+            <!-- Monthly Intake -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Monthly progress</b>
+                </div>
+                <div class="col-7">
+                    <div class="progress" style="height: 20px;">
+                        @{
+                            double monthlyPossibleQuantity = 0.0;
+                            double monthlyRequiredQuantity = 0.0;
+
+                            int monthlyValue = 0;
+                            if (Model.MonthlyWaterIntake.Count != 0)
+                            {
+                                foreach (var monthWater in Model.MonthlyWaterIntake)
+                                {
+                                    if (monthWater != null)
+                                    {
+                                        monthlyPossibleQuantity += monthWater.Quantity;
+                                        monthlyRequiredQuantity += monthWater.RequiredQuantity;
+                                    }
+                                }
+                            }
+
+                            if (monthlyPossibleQuantity != 0 && monthlyRequiredQuantity != 0)
+                            {
+                                monthlyValue = (int)(((monthlyPossibleQuantity * 1.0) / (monthlyRequiredQuantity * 1.0)) * 100.00);
+                                if (monthlyValue > 100)
+                                    monthlyValue = 100;
+                            }
+                            double monthlyQuantity = Math.Round(monthlyPossibleQuantity, 2);
+                        }
+                        <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @monthlyValue%;" aria-valuenow="@monthlyValue" aria-valuemin="0" aria-valuemax="100">@monthlyValue %</div>
+                    </div>
+                </div>
+
+                <div class="col-2 text-right">
+                    <b>@monthlyQuantity liters</b>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row form-group mb-5">
+                <div class="col-1 text-right">
+                    I drank
+                </div>
+                <div class="col-3">
+                    <input id="waterIntake" name="waterIntake" type="number" min="0" step=".01" class="form-control" value="0" />
+                </div>
+                <div class="col-3 text-left">
+                    more liters of water today
+                </div>
+                <div class="col-5">
+                    <button class="btn btn-info btn-block" type="submit">Update Water Intake</button>
+                </div>
+            </div>
+
+        </form>
+
+        <h4 style="color: #89c540;">Diet Progress</h4>
+        <hr class="w-100 text-secondary mt-4 mb-5" />
+
+        <!-- Diets -->
+
+        <form asp-action="StatisticsUpdateDiet" asp-controller="Account" method="post">
+
+            <!-- Active Diet -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Active Diet </b>
+                </div>
+                @if (Model.CurrentDiet != null)
+                {
+                    <div class="col-3">
+                        <a asp-controller="DietPlans" asp-action="Details" asp-route-dietPlanId="@Model.CurrentDiet.Id"
+                           class="btn btn-outline-info">
+                            @Model.CurrentDiet.Name
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <div class="star-widget text-right" style="font-size: 26px;">
+                            @{
+                                int counterStars = 0;
+                                for (int i = 0; i < Model.CurrentUserDiet.Rating; i++)
+                                {
+                                    counterStars++;
+                                    <a asp-controller="Account" asp-action="StatisticsRateDiet" asp-route-rating="@counterStars"
+                                       class="btn btn-outline-success">
+                                        <span class="star fa fa-star checked"></span>
+                                    </a>
+                                }
+                                for (int i = 0; i < 5 - Model.CurrentUserDiet.Rating; i++)
+                                {
+                                    counterStars++;
+                                    <a class="btn btn-outline-success" asp-controller="Account" asp-action="StatisticsRateDiet" asp-route-rating="@counterStars">
+                                        <span class="star fa fa-star text-dark"></span>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-9">
+                        You have no active diet.
+                    </div>
+                }
+            </div>
+
+            <!-- Active Diet daily Progress -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Active Diet daily progress</b>
+                </div>
+                @if (Model.CurrentUserDiet != null)
+                {
+                    <div class="col-7">
+                        <div class="progress" style="height: 20px;">
+                            @{
+                                var dietDay = Model.CurrentDay;
+                                double noEatenVictual = 0;
+                                double noTotalVictuals = dietDay.Victuals.Count;
+
+                                foreach (var victual in dietDay.Victuals)
+                                {
+                                    var eaten = Model.Statistics.Victuals.Where(z =>
+                                        z.VictualId.Equals(victual.VictualId)
+                                        && z.Date.DayOfYear == DateTime.Now.DayOfYear).SingleOrDefault();
+
+                                    if (eaten != null && eaten.Quantity >= victual.Quantity)
+                                        noEatenVictual++;
+                                }
+
+                                int dietDailyProgress = (int)((noEatenVictual / noTotalVictuals) * 100.00);
+                            }
+                            <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @dietDailyProgress%;" aria-valuenow="@dietDailyProgress" aria-valuemin="0" aria-valuemax="100">@dietDailyProgress %</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-right">
+                        <b>@noEatenVictual / @noTotalVictuals eaten</b>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-9">You have no active diet.</div>
+                }
+            </div>
+
+            <!-- Active Diet days completed Progress -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Active Diet progress</b>
+                </div>
+                @{
+                    Int64 completed = 0;
+                }
+                @if (Model.CurrentDiet != null)
+                {
+                    <div class="col-7">
+                        <div class="progress" style="height: 20px;">
+                            @{
+                                completed = Model.CurrentUserDiet.DaysCompleted;
+                                double length = Model.CurrentDiet.LengthDays;
+
+                                int completedProgress = (int)(((double)completed / length) * 100.00);
+                            }
+                            <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @completedProgress%;" aria-valuenow="@completedProgress" aria-valuemin="0" aria-valuemax="100">@completedProgress %</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-right">
+                        <b>@completed / @length days </b>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-9">You have no active diet.</div>
+                }
+            </div>
+
+            <!-- Active Diet days overall -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3">
+                    <b>Active Diet days</b>
+                </div>
+                @if (Model.CurrentDiet != null)
+                {
+                    <div class="col-7">
+                        <div class="progress" style="height: 20px;">
+                            @{
+                                double activeLength = DateTime.Now.DayOfYear - Model.CurrentUserDiet.DateStarted.DayOfYear;
+                                double length = Model.CurrentDiet.LengthDays;
+
+                                if (activeLength < completed)
+                                    activeLength = completed;
+
+                                int dietProgress = (int)((activeLength / length) * 100.00);
+                            }
+                            <div class="progress-bar progress-bar-striped text-white" role="progressbar" style="width: @dietProgress%;" aria-valuenow="@dietProgress" aria-valuemin="0" aria-valuemax="100">@dietProgress %</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-right">
+                        <b>@activeLength / @length days </b>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-9">You have no active diet.</div>
+                }
+            </div>
+
+            <!-- Active Diet Form -->
+
+            <br />
+
+            <div class="row form-group mb-5">
+                <div class="col-2 text-left">
+                    I ate/drank
+                </div>
+                <div class="col-1">
+                    <input id="foodQuantity" name="foodQuantity" type="number" min="1" class="form-control" value="0" />
+                </div>
+                <div class="col-2">
+                    <select class="form-control" name="food" id="food">
+                        @foreach (var food in Model.Victuals)
+                        {
+                            <option value="@food.Id">@food.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-2 text-left">
+                    today
+                </div>
+                <div class="col-5">
+                    <button class="btn btn-info btn-block" type="submit">Update Food Intake</button>
+                </div>
+            </div>
+
+            <!-- Previous Diets List -->
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-left">
+                    <b>Previous Diets</b>
+                </div>
+                <div class="col-9">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Diet Name</th>
+                                <th scope="col">Date Started</th>
+                                <th scope="col">Date Finished</th>
+                                <th scope="col">Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var counter = 0;
+                                foreach (var diet in Model.Statistics.Diets)
+                                {
+                                    if (diet.Active == false)
+                                    {
+                                        counter++;
+                                        <tr>
+                                            <th scope="row">@counter</th>
+                                            <td>
+                                                <a asp-controller="DietPlans" asp-action="Details" asp-route-dietPlanId="@diet.DietId" class="btn btn-outline-info">@diet.Diet.Name</a>
+                                            </td>
+                                            <td>@diet.DateStarted</td>
+                                            <td>@diet.DateFinished</td>
+                                            <td>
+                                                @{
+                                                    for (int i = 0; i < diet.Rating; i++)
+                                                    {
+                                                        <span class="fa fa-star checked" style="color: orange;"></span>
+                                                    }
+                                                    for (int i = 0; i < 5 - diet.Rating; i++)
+                                                    {
+                                                        <span class="fa fa-star text-dark"></span>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </form>
+
+        <h4 style="color: #89c540;">Food Diary</h4>
+        <hr class="w-100 text-secondary mt-4 mb-5" />
+
+        <!-- Food Diary -->
+
+        <div class="row text-dark mt-3">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Calories</th>
+                        <th scope="col">Last Eaten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int counterFoods = 0;
+                        foreach (var food in Model.Statistics.Victuals)
+                        {
+                            counterFoods++;
+                            Int64 totalCalories = food.Quantity * food.Victual.NumberCalories;
+                            <tr>
+                                <th scope="row">@counterFoods</th>
+                                <td>@food.Victual.Name</td>
+                                <td>@food.Quantity</td>
+                                <td>@totalCalories</td>
+                                <td>@food.Date</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+    </div>
+
+</div>

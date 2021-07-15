@@ -1,0 +1,115 @@
+﻿@model HealthyDiet.Domain.Identity.UserSettingsDto
+
+@{
+    ViewData["Title"] = "User Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.ValidationSummary()
+
+    <div class="container px-5 my-5 pb-5" style="border-radius: 10px;">
+
+        <div class="row mb-5">
+            <div class="col text-center" style="color: #89c540;">
+                <h1 class="lead display-4 font-weight-light">User Friends</h1>
+            </div>
+        </div>
+
+        <h4 style="color: #89c540;">All Friends</h4>
+        <hr class="w-100 text-secondary my-4" />
+
+        <!-- All Friends -->
+
+        <div class="row mb-4">
+            <div class="col-12">
+                @foreach (var item in Model.Friends)
+                {
+                    <div class="row my-3 align-items-center">
+                        <div class="col-3 text-center">
+                            <img class="rounded-circle border border-secondary" src="~/custom/img/profile-pictures/@item.ProfilePictureURL" height="110" width="110" />
+                        </div>
+                        <div class="col-3 lead text-left" style="font-size: 24px;">
+                            @item.Name
+                            @item.Surname
+                        </div>
+                        <div class="col-4 lead text-left" style="font-size: 24px;">
+                            @item.Age years, @item.Weight kg, @item.Height cm
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-danger btn-block" asp-controller="Account" asp-action="RemoveUserFriend" asp-route-friendId="@item.Id">Remove Friend</a>
+                        </div>
+                    </div>
+
+                    <hr class="w-100 text-secondary my-4" />
+                }
+            </div>
+        </div>
+
+        <h4 style="color: #89c540;">Friend Suggestions</h4>
+        <hr class="w-100 text-secondary my-4" />
+
+        <!-- Suggestions -->
+
+        <div class="row mb-4">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Art Name</th>
+                        <th scope="col">Favourite Fruit</th>
+                        <th scope="col">Favourite Veggie</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Suggestions.Count; i++)
+                    {
+                        var item = Model.Suggestions.ElementAt(i);
+
+                        <tr class="align-items-center">
+                            <th scope="row">
+                                <img class="rounded-circle border border-secondary" src="~/custom/img/profile-pictures/@item.ProfilePictureURL" height="40" width="40" />
+                            </th>
+                            <td>@item.Name</td>
+                            <td>@item.Surname</td>
+                            <td>@item.Email</td>
+                            @if (item.CommunityInfo.ArtName != null && !item.CommunityInfo.ArtName.Equals(""))
+                            {
+                                <td>@item.CommunityInfo.ArtName</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (item.CommunityInfo.FavouriteFruit != null && !item.CommunityInfo.FavouriteFruit.Equals(""))
+                            {
+                                <td>@item.CommunityInfo.FavouriteFruit</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            @if (item.CommunityInfo.FavouriteVeggie != null && !item.CommunityInfo.FavouriteVeggie.Equals(""))
+                            {
+                                <td>@item.CommunityInfo.FavouriteVeggie</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td class="text-right mx-2">
+                                <a asp-controller="Account" asp-action="AddUserFriend" asp-route-userId="@item.Id" class="btn btn-info btn-block">Add Friend</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

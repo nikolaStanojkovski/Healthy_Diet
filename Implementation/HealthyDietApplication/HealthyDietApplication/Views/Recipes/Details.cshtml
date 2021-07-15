@@ -1,0 +1,168 @@
+﻿@model HealthyDiet.Domain.Domain.Recipe
+
+@{
+    ViewData["Title"] = "Recipe Plan - " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--    Font Awesome CSS Import   -->
+<link rel="stylesheet" href="~/custom/fontawesome/css/all.css">
+<link rel="stylesheet" href="~/custom/fontawesome/css/fontawesome.css">
+<link rel="stylesheet" href="~/custom/fontawesome/css/fontawesome.min.css">
+
+<!--    Main Part   -->
+
+<div class="container my-5 mx-auto">
+    <div class="row mx-5">
+        <div class="col-12 mx-4 portfolio-item">
+            <div class="card h-100">
+                <a href="#">
+                    <img class="card-img-top" src="@Model.PictureURL"
+                         style="height: 550px;" />
+                </a>
+                <div class="card-body">
+                    <h1 class="card-title text-center">
+                        @Model.Name
+                    </h1>
+                    <p class="card-text text-center mt-3 bg-white">@Model.Preparation</p>
+                    <div class="row text-white">
+                        <div class="col">
+                            <div class="mt-1 mb-5 text-center" style="font-size: 50px;">
+                                @{
+                                    int avgInt = 0;
+                                    if (Model.NoFeedbacks != 0 && Model.FeedbackSum != 0)
+                                        avgInt = (int)(Model.FeedbackSum / Model.NoFeedbacks);
+
+                                    for (int j = 0; j < avgInt; j++)
+                                    {
+                                        <span class="fa fa-star checked" style="color: orange;"></span>
+                                    }
+                                    for (int j = 0; j < 5 - avgInt; j++)
+                                    {
+                                        <span class="fa fa-star text-dark"></span>
+                                    }
+                                    <br />
+                                    <h2 class="text-center text-dark lead">Average Rating: @avgInt</h2>
+                                }
+                            </div>
+                            <div class="row text-dark mt-3 mb-4">
+                                @{
+                                    Int64 sumCalories = 0;
+                                }
+                                <div class="col-6">
+                                    <div class="list-group">
+                                        @{
+                                            for (int i = 0; i < (Model.Victuals.Count / 2); i++)
+                                            {
+                                                var victual = Model.Victuals.ElementAt(i);
+                                                Int64 calories = victual.Victual.NumberCalories * victual.Quantity;
+
+                                                <div class="list-group-item list-group-item-action flex-column mb-3 align-items-start">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">@victual.Victual.Name</h5>
+                                                        <small>x @victual.Quantity</small>
+                                                    </div>
+                                                    <p class="mb-1">Ingridient type: @victual.Victual.Type</p>
+                                                    <p class="mb-1">Number of calories: @victual.Victual.NumberCalories</p>
+                                                    <small>@calories kcal</small>
+                                                </div>
+
+                                                sumCalories += calories;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="list-group">
+                                        @{
+                                            for (int i = (Model.Victuals.Count / 2); i < Model.Victuals.Count; i++)
+                                            {
+                                                var victual = Model.Victuals.ElementAt(i);
+                                                Int64 calories = victual.Victual.NumberCalories * victual.Quantity;
+
+                                                <div class="list-group-item list-group-item-action mb-3 flex-column align-items-start">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">@victual.Victual.Name</h5>
+                                                        <small>x @victual.Quantity</small>
+                                                    </div>
+                                                    <p class="mb-1">Ingridient type: @victual.Victual.Type</p>
+                                                    <p class="mb-1">Number of calories: @victual.Victual.NumberCalories</p>
+                                                    <small>@calories kcal</small>
+                                                </div>
+
+                                                sumCalories += calories;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card mt-4 mb-3">
+                                <div class="card-body text-dark">
+                                    <p class="mb-1 lead"><b>Preparation time:</b> @Model.PreparationTime minutes</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="my-1 lead"><b>Meal Type:</b> @Model.MealType</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="my-1 lead"><b>Times cooked:</b> @Model.TimesCooked times cooked</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="mt-1 lead"><b>Number of calories:</b> @sumCalories kcal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="col-6">
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModalCenter">I cooked this recipe</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Leave feedback for @Model.Name</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Great! How much did you like this recipe? It will help others choose the best recipe on the website!
+                                            </div>
+                                            <hr class="w-100 text-secondary" />
+                                            <div class="star-widget text-center mb-3" style="font-size: 26px;">
+                                                @{
+                                                    for (int i = 0; i < 5; i++)
+                                                    {
+                                                        <a class="btn btn-outline-success" asp-controller="Recipes" asp-action="ChooseRecipeForUser" asp-route-rating="@(i+1)" asp-route-recipeId="@Model.Id">
+                                                            <span class="star fa fa-star"></span>
+                                                        </a>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <a asp-controller="Recipes" asp-action="Index" class="btn btn-block btn-outline-secondary">Back to List</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <a asp-controller="Recipes" asp-action="Index" class="btn btn-block btn-outline-secondary">Back to List</a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

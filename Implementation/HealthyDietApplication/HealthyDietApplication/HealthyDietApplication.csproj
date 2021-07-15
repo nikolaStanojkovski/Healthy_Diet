@@ -1,0 +1,92 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-HealthyDietApplication-7ED79A6D-0B10-4019-B7C6-A9B8BB2D104A</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\custom\css\bootstrap-grid.css" />
+    <None Include="wwwroot\custom\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\custom\css\bootstrap-grid.min.css" />
+    <None Include="wwwroot\custom\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\custom\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\custom\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\custom\css\bootstrap-reboot.min.css" />
+    <None Include="wwwroot\custom\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\custom\css\bootstrap.css" />
+    <None Include="wwwroot\custom\css\bootstrap.css.map" />
+    <None Include="wwwroot\custom\css\bootstrap.min.css" />
+    <None Include="wwwroot\custom\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\custom\css\c3.css" />
+    <None Include="wwwroot\custom\fontawesome\css\all.css" />
+    <None Include="wwwroot\custom\fontawesome\css\all.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\brands.css" />
+    <None Include="wwwroot\custom\fontawesome\css\brands.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\fontawesome.css" />
+    <None Include="wwwroot\custom\fontawesome\css\fontawesome.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\regular.css" />
+    <None Include="wwwroot\custom\fontawesome\css\regular.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\solid.css" />
+    <None Include="wwwroot\custom\fontawesome\css\solid.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\svg-with-js.css" />
+    <None Include="wwwroot\custom\fontawesome\css\svg-with-js.min.css" />
+    <None Include="wwwroot\custom\fontawesome\css\v4-shims.css" />
+    <None Include="wwwroot\custom\fontawesome\css\v4-shims.min.css" />
+    <None Include="wwwroot\custom\fontawesome\LICENSE.txt" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-brands-400.eot" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-brands-400.ttf" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-brands-400.woff" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-regular-400.eot" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-regular-400.ttf" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-regular-400.woff" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-solid-900.eot" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-solid-900.ttf" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-solid-900.woff" />
+    <None Include="wwwroot\custom\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\custom\img\profile-pictures\default-account.png" />
+    <None Include="wwwroot\custom\img\home-page.jpg" />
+    <None Include="wwwroot\custom\img\logo.png" />
+    <None Include="wwwroot\custom\img\person-icon.png" />
+    <None Include="wwwroot\custom\img\recipes\bean-soup.jpg" />
+    <None Include="wwwroot\custom\img\recipes\burito-bowl.jpg" />
+    <None Include="wwwroot\custom\img\recipes\cobb-salad.jpg" />
+    <None Include="wwwroot\custom\img\recipes\mini-fritetas.jpg" />
+    <None Include="wwwroot\custom\img\recipes\pulled-pork.jpg" />
+    <None Include="wwwroot\custom\img\recipes\tuna-salad.jpg" />
+    <None Include="wwwroot\custom\img\sing-up-page-bg.jpg" />
+    <None Include="wwwroot\custom\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\custom\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\custom\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\custom\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\custom\js\bootstrap.js" />
+    <None Include="wwwroot\custom\js\bootstrap.js.map" />
+    <None Include="wwwroot\custom\js\bootstrap.min.js" />
+    <None Include="wwwroot\custom\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\custom\js\c3.min.js" />
+    <None Include="wwwroot\custom\js\d3.min.js" />
+    <None Include="wwwroot\custom\js\jquery-3.4.1.slim.min.js" />
+    <None Include="wwwroot\custom\js\popper.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HealthyDiet.Domain\HealthyDiet.Domain.csproj" />
+    <ProjectReference Include="..\HealthyDiet.Repository\HealthyDiet.Repository.csproj" />
+    <ProjectReference Include="..\HealthyDiet.Service\HealthyDiet.Service.csproj" />
+  </ItemGroup>
+
+</Project>

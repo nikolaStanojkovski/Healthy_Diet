@@ -1,0 +1,192 @@
+﻿@model HealthyDiet.Domain.Identity.UserSettingsDto
+
+@{
+    ViewData["Title"] = "User Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @Html.ValidationSummary()
+    
+    <div class="container px-5 my-5 pb-5" style="border-radius: 10px;">
+
+        <div class="row mb-5">
+            <div class="col text-center" style="color: #89c540;">
+                <h1 class="lead display-4 font-weight-light">Account Settings</h1>
+            </div>
+        </div>
+
+        <h4 style="color: #89c540;">Personal Information</h4>
+        <hr class="w-100 text-secondary my-4" />
+
+        <!-- Personal Information -->
+
+        <form asp-action="SettingsProfilePicture" asp-controller="Account" method="post" enctype="multipart/form-data">
+            <div class="row mb-4 mt-4">
+                <div class="col-3 text-right">
+                    <b class="text-right">Profile Picture</b>
+                </div>
+                <div class="col-2 text-center">
+                    <img class="rounded-circle border border-secondary" src="~/custom/img/profile-pictures/@Model.ProfilePictureURL" height="130" width="130" />
+                </div>
+                <div class="col-6 form-group">
+                    <input id="file" name="file" type="file" accept="image/*" />
+                    <p class="lead mt-1">Accpeted file types: .png, jpg</p>
+                    <button type="submit" class="btn btn-secondary">Change Picture</button>
+                </div>
+            </div>
+        </form>
+
+        <form asp-action="SettingsPersonalInfo" asp-controller="Account" method="post">
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>E-mail</b>
+                </div>
+                <div class="col-9">
+                    <input id="email" name="email" type="text" disabled class="form-control" value="@Model.Email" />
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>First Name</b>
+                </div>
+                <div class="col-9">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>Last Name</b>
+                </div>
+                <div class="col-9">
+                    <input asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>Language</b>
+                </div>
+                <div class="col-9">
+                    <select class="form-control" asp-for="Language" asp-items="Html.GetEnumSelectList<HealthyDiet.Domain.Enumerations.Language>()">
+                    </select>
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>Age</b>
+                </div>
+                <div class="col-1">
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                <div class="col-1 text-left">
+                    y/o
+                </div>
+                <div class="col-1 text-right">
+                    <b>Height</b>
+                </div>
+                <div class="col-1">
+                    <input asp-for="Height" class="form-control" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+                <div class="col-1 text-left">
+                    cm
+                </div>
+                <div class="col-1 text-right">
+                    <b>Weight</b>
+                </div>
+                <div class="col-1">
+                    <input asp-for="Weight" class="form-control" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+                <div class="col-1 text-left">
+                    kg
+                </div>
+            </div>
+
+            <div class="row form-group mb-5">
+                <div class="col-3">
+
+                </div>
+                <div class="col-9">
+                    <button class="btn btn-info btn-block" type="submit">Change</button>
+                </div>
+            </div>
+
+        </form>
+
+        <h4 class="mt-1" style="color: #89c540;">Community Information</h4>
+        <hr class="w-100 text-secondary my-4" />
+
+        <!-- Community Information -->
+
+        <form asp-action="SettingsCommunityInfo" asp-controller="Account" method="post">
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>Art Name</b>
+                </div>
+                <div class="col-9">
+                    <input asp-for="ArtName" class="form-control" />
+                    <span asp-validation-for="ArtName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-4">
+                <div class="col-3 text-right">
+                    <b>Favourite Fruit</b>
+                </div>
+                <div class="col-9">
+                    <input asp-for="FavouriteFruit" class="form-control" />
+                    <span asp-validation-for="FavouriteFruit" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-5">
+                <div class="col-3 text-right">
+                    <b>Favourite Veggie</b>
+                </div>
+                <div class="col-9">
+                    <input asp-for="FavouriteVeggie" class="form-control" />
+                    <span asp-validation-for="FavouriteVeggie" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group mb-5">
+                <div class="col-3">
+
+                </div>
+                <div class="col-9">
+                    <button class="btn btn-info btn-block" type="submit">Change</button>
+                </div>
+            </div>
+
+        </form>
+
+        <hr class="w-100 text-secondary my-4" />
+
+        <a class="btn btn-block btn-outline-primary mb-3" asp-action="Friends" asp-controller="Account">
+            Friends
+        </a>
+
+        <a class="btn btn-block btn-outline-info mb-3" asp-action="Statistics" asp-controller="Account">
+            Statistics
+        </a>
+
+        <a class="btn btn-block btn-danger" asp-action="Logout" asp-controller="Account">
+            Logout
+        </a>
+
+
+    </div>
+
+</div>

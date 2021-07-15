@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HealthyDiet.Domain.Identity
+
+@inject SignInManager<HealthyDietUser> SignInManager
+@inject UserManager<HealthyDietUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-controller="Account" asp-action="Friends">Friends</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-controller="Account" asp-action="Statistics">Statistics</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-controller="Account" asp-action="Settings">Settings</a>
+        </li>
+        <li class="nav-item">
+            &nbsp;
+            &nbsp;
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button font-size: 18px;" type="submit" class="nav-link btn btn-link text-danger font-weight-bold">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>

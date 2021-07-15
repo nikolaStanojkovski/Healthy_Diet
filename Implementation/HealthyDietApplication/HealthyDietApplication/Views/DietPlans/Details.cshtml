@@ -1,0 +1,160 @@
+﻿@model HealthyDiet.Domain.Domain.Diet
+
+@{
+    ViewData["Title"] = "Diet Plan - " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--    Font Awesome CSS Import   -->
+<link rel="stylesheet" href="~/custom/fontawesome/css/all.css">
+<link rel="stylesheet" href="~/custom/fontawesome/css/fontawesome.css">
+<link rel="stylesheet" href="~/custom/fontawesome/css/fontawesome.min.css">
+
+<!--    Main Part   -->
+
+<div class="container my-5 mx-auto">
+    <div class="row mx-5">
+        <div class="col-12 mx-4 portfolio-item">
+            <div class="card h-100">
+                <a href="#">
+                    <img class="card-img-top" src="@Model.PictureURL"
+                         style="height: 550px;" />
+                </a>
+                <div class="card-body">
+                    <h1 class="card-title text-center">
+                        @Model.Name
+                    </h1>
+                    <p class="card-text text-center mt-3 bg-white">@Model.Description</p>
+                    <div class="row text-white">
+                        <div class="col">
+                            <div class="mt-1 mb-5 text-center" style="font-size: 50px;">
+                                @{
+                                    double average = 0.0;
+                                    double avgInt = 0.0;
+                                    if (Model.Diets != null && Model.Diets.Count != 0)
+                                    {
+                                        foreach (var userDiets in Model.Diets)
+                                        {
+                                            average += userDiets.Rating;
+                                        }
+
+                                        average /= Model.Diets.Count;
+                                        average = Math.Round(average, 2);
+
+                                        avgInt = (int)average;
+                                    }
+
+                                    for (int i = 0; i < avgInt; i++)
+                                    {
+                                        <span class="fa fa-star checked" style="color: orange;"></span>
+                                    }
+                                    for (int i = 0; i < 5 - avgInt; i++)
+                                    {
+                                        <span class="fa fa-star text-dark"></span>
+                                    }
+                                    <br />
+                                    <h2 class="text-center text-dark lead">Average Rating: @average</h2>
+                                }
+                            </div>
+                            <div class="row text-dark mt-3">
+                                @{
+                                    int counter = 1;
+                                    double sumCalories = 0;
+                                    foreach (var day in Model.Days)
+                                    {
+                                        <div class="col-4">
+                                            <div class="card mb-3">
+                                                                                <div class="card-header" style="background-color: #e1e1e1;">
+                                                                                    <b class="lead">Day @counter</b>
+                                                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-group text-dark">
+                                                        @foreach (var victual in day.Victuals)
+                                                        {
+                                                            var calories = victual.Victual.NumberCalories * victual.Quantity;
+
+                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                @victual.Victual.Name
+                                                                <span class="badge badge-info badge-pill text-right">x @victual.Quantity = @calories kcal</span>
+                                                            </li>
+
+                                                            sumCalories += calories;
+                                                            
+                                                        }
+                                                    </ul>
+                                                    @{
+                                                        counter++;
+                }
+                                                </div>
+                                                <div class="card-footer text-right">
+                                                    <b class="lead">@sumCalories kcal</b> 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1 mt-3">
+                        <div class="col-12">
+                            <div class="card my-4">
+                                <div class="card-body text-dark">
+                                    <p class="mb-1 lead"><b>Length:</b> @Model.LengthDays days</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="my-1 lead"><b>Weight Loss approx:</b> @Model.WeightLoss kg</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="my-1 lead"><b>Times chosen:</b> @Model.Diets.Count times</p>
+                                    <hr class="text-secondary my-2" />
+                                    <p class="mt-1 lead"><b>Intensity:</b> @Model.Intensity%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <div class="col-6">
+                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Choose Diet</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Choose @Model.Name as Active</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to choose this diet as your current active? You previous chosen diet is going to be stored as finished.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <a asp-controller="DietPlans" asp-action="ChooseDietForUser" asp-route-dietPlanId="@Model.Id"
+                                               class="btn btn-primary">Save Changes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-6">
+                                <a asp-controller="DietPlans" asp-action="Index" class="btn btn-block btn-outline-secondary">Back to List</a>
+                            </div>
+                        } else
+            {
+                    <div class="col-12">
+                        <a asp-controller="DietPlans" asp-action="Index" class="btn btn-block btn-outline-secondary">Back to List</a>
+                    </div>
+            }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

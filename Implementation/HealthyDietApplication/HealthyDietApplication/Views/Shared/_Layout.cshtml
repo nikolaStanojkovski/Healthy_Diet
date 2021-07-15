@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Diet Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!--    Font Awesome CSS Import   -->
+    <link rel="stylesheet" href="~/custom/fontawesome/css/all.css">
+    <link rel="stylesheet" href="~/custom/fontawesome/css/fontawesome.css">
+</head>
+<body class="mb-0 mt-0">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img class="rounded" height="40" width="200" src="~/custom/img/logo/initials.png" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 ml-2">
+                        <li class="nav-item mx-1">
+                            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-area="" asp-controller="DietPlans" asp-action="Index">Diet Plans</a>
+                        </li>
+                        <li class="nav-item mx-1">
+                            <a class="nav-link font-weight-bold" style="color: #89c540; font-size: 18px;" asp-area="" asp-controller="CalorieCounter" asp-action="Index">Calorie Counter</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <footer class="text-center bg-white text-dark">
+
+        <!-- Copyright -->
+        <div class="text-center p-4 font-weight-bold" style="color: #89c540;">
+            © 2021 Copyright:
+            <a style="color: #89c540;" href="/">Healthy Diet</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
