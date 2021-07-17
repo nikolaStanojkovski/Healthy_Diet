@@ -33,7 +33,7 @@ namespace HealthyDiet.Service.Implementation
 
             if (checkOffset == 0) // first page check
                 pageSize = recipes.Count;
-            else if (checkOffset == pageNumber) // last page check
+            else if ((checkOffset + 1) == pageNumber) // last page check
             {
                 long lastOffset = (int)(recipes.Count % firstOffset);
                 if (lastOffset < 9)
@@ -60,7 +60,7 @@ namespace HealthyDiet.Service.Implementation
                 recipes = recipes.Where(z => z.Victuals.Sum(
                     t => t.Quantity * t.Victual.NumberCalories) <= noCalories).ToList();
 
-            return GetPaginatedRecipes(pageNumber, recipes);
+            return recipes;
         }
 
         public List<Recipe> SortRecipes(long sortCondition, List<Recipe> recipes, Int64 pageNumber)
@@ -70,7 +70,7 @@ namespace HealthyDiet.Service.Implementation
             else // if second is checked
                 recipes = recipes.OrderByDescending(z => (z.FeedbackSum / z.NoFeedbacks)).ToList();
 
-            return GetPaginatedRecipes(pageNumber, recipes);
+            return recipes;
         }
 
         public List<Recipe> SearchRecipes(string text, Int64 pageNumber)
@@ -94,7 +94,7 @@ namespace HealthyDiet.Service.Implementation
                 filteredRecipes.AddRange(recipes.Where(z => z.Victuals.Where(t => t.Victual.Name.Contains(text)).Count() != 0
                 && filteredRecipes.Where(t => t.Id.Equals(z.Id)).Count() == 0).ToList());
 
-            return GetPaginatedRecipes(pageNumber, filteredRecipes);
+            return filteredRecipes;
         }
 
 

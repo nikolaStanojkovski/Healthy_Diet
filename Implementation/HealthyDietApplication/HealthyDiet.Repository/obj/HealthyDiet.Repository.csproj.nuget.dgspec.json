@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {}
+    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
+    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
         "projectName": "HealthyDiet.Domain",
-        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -68,14 +68,14 @@
         }
       }
     },
-    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {
+    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj",
         "projectName": "HealthyDiet.Repository",
-        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -92,8 +92,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
-                "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
+              "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
+                "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
               }
             }
           }
@@ -108,6 +108,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.7, )"

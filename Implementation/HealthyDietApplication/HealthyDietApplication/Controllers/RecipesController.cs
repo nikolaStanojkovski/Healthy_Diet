@@ -23,18 +23,26 @@ namespace HealthyDietApplication.Controllers
             this.victualService = _victualService;
         }
 
-        public IActionResult Index(Int64 pageNumber = 1)
+        public IActionResult Index(Int64 pageNumber = 1, bool sorted = false, int sortCondition = 2)
         {
             // DBDataInsertion insertion = new DBDataInsertion(recipeService, victualService);
             // insertion.PopulateDatabaseRecipes();
 
-            List<Recipe> allRecipes = recipeService.GetAllRecipes();
+            List<Recipe> allRecipes = new List<Recipe>();
+            if (sorted)
+                allRecipes = recipeService.SortRecipes(sortCondition, recipeService.GetAllRecipes(), pageNumber);
+            else
+                allRecipes = recipeService.GetAllRecipes();
+
             List<Recipe> paginatedRecipes = recipeService.GetPaginatedRecipes(pageNumber, allRecipes);
             RecipesDTO model = new RecipesDTO
             {
                 Recipes = paginatedRecipes,
                 RecipesSize = allRecipes.Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = false,
+                AreSorted = sorted,
+                SortCondition = sortCondition
             };
             return View(model);
         }
@@ -47,7 +55,10 @@ namespace HealthyDietApplication.Controllers
             {
                 Recipes = filteredRecipes,
                 RecipesSize = recipeService.GetAllRecipes().Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = true,
+                AreSorted = false,
+                SortCondition = 2
             };
             return View("Index", model);
         }
@@ -55,12 +66,16 @@ namespace HealthyDietApplication.Controllers
         [HttpPost]
         public IActionResult SortRecipes(Int64 sortCondition, Int64 pageNumber)
         {
-            List<Recipe> sortedRecipes = recipeService.SortRecipes(sortCondition, recipeService.GetAllRecipes(), pageNumber);
+            List<Recipe> sortedRecipes =
+                recipeService.GetPaginatedRecipes(pageNumber, recipeService.SortRecipes(sortCondition, recipeService.GetAllRecipes(), pageNumber));
             RecipesDTO model = new RecipesDTO
             {
                 Recipes = sortedRecipes,
                 RecipesSize = recipeService.GetAllRecipes().Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = false,
+                AreSorted = true,
+                SortCondition = (int)sortCondition
             };
             return View("Index", model);
         }
@@ -73,7 +88,10 @@ namespace HealthyDietApplication.Controllers
             {
                 Recipes = searchedRecipes,
                 RecipesSize = recipeService.GetAllRecipes().Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = true,
+                AreSorted = false,
+                SortCondition = 2
             };
             return View("Index", model);
         }

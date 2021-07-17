@@ -236,7 +236,16 @@
                         <h4 class="card-title text-center">
                             @item.Name
                         </h4>
-                        <p class="card-text text-center">@item.ShortDescription</p>
+                        @if (item.ShortDescription.Length > 200)
+                        {
+                            <p class="card-text text-center">@item.ShortDescription.Substring(0, 200) ...</p>
+                        }
+                        else
+                        {
+                            <p class="card-text text-center">@item.ShortDescription</p>
+                        }
+                    </div>
+                    <div class="card-footer">
                         <div class="row">
                             <div class="col-6">
                                 <a asp-controller="Recipes" asp-action="Details" asp-route-recipeId="@item.Id" class="btn btn-info btn-block font-weight-bold">Learn More</a>
@@ -271,60 +280,64 @@
 <br />
 <br />
 
-<!--    Pagination   -->
-<div class="container mt-4">
-    <ul class="pagination justify-content-center">
+<!--    No pagination for filtered recipes   -->
+@if (!Model.AreFiltered)
+{
+    <!--    Pagination   -->
+    <div class="container mt-4">
+        <ul class="pagination justify-content-center">
 
-        @if (Model.PageNumber == 1)
-        {
-            <li class="page-item prev-next disabled">
-                <a class="page-link number-alt btn-success active-green disabled" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)">
-                    <span aria-hidden="true">Previous</span>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item prev-next">
-                <a class="page-link number-alt btn-success active-green" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)">
-                    <span aria-hidden="true">Previous</span>
-                </a>
-            </li>
-        }
-        @{
-            for (int i = 0; i < (Model.RecipesSize / 9) + 1; i++)
+            @if (Model.PageNumber == 1)
             {
-                if ((i + 1) == Model.PageNumber)
-                {
-                    <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(i+1)" class="page-link active-green paginateLink">@(i+1)</a></li>
-                }
-                else
-                {
-                    <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(i+1)" class="page-link paginateLink">@(i+1)</a></li>
-                }
-
+                <li class="page-item prev-next disabled">
+                    <a class="page-link number-alt btn-success active-green disabled" asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
             }
-        }
+            else
+            {
+                <li class="page-item prev-next">
+                    <a class="page-link number-alt btn-success active-green" asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+            }
+            @{
+                for (int i = 0; i < (Model.RecipesSize / 9) + 1; i++)
+                {
+                    if ((i + 1) == Model.PageNumber)
+                    {
+                        <li class="page-item mx-2"><a asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(i+1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link active-green paginateLink">@(i+1)</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item mx-2"><a asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(i+1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link paginateLink">@(i+1)</a></li>
+                    }
+
+                }
+            }
 
 
-        @if (Model.PageNumber == (Model.RecipesSize / 9) || (Model.RecipesSize / 9) == 0)
-        {
-            <li class="page-item disabled">
-                <a class="page-link number-alt btn btn-success disabled" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
-                    <span>Next</span>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link number-alt btn btn-success active-green" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
-                    <span>Next</span>
-                </a>
-            </li>
-        }
-    </ul>
-</div>
+            @if (Model.PageNumber == ((Model.RecipesSize / 9) + 1) || (Model.RecipesSize / 9) == 0)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link number-alt btn btn-success disabled" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
+                        <span>Next</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link number-alt btn btn-success active-green" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
+                        <span>Next</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}
 
 <style>
     .active-green {

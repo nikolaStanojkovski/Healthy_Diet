@@ -12,8 +12,6 @@ namespace HealthyDiet.Domain.Enumerations
         [Display(Name = "Food")]
         FOOD,
         [Display(Name = "Drink")]
-        DRINK,
-        [Display(Name = "Water")]
-        WATER
+        DRINK
     }
 }

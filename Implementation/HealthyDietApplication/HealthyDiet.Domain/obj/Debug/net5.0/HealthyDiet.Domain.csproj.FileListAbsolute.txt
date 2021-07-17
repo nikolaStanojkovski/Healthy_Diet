@@ -22,3 +22,15 @@ C:\Users\Nick\Documents\GitHub\Healthy_Diet\HealthyDietApplication\HealthyDiet.D
 C:\Users\Nick\Documents\GitHub\Healthy_Diet\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\ref\HealthyDiet.Domain.dll
 C:\Users\Nick\Documents\GitHub\Healthy_Diet\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.pdb
 C:\Users\Nick\Documents\GitHub\Healthy_Diet\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\bin\Debug\net5.0\HealthyDiet.Domain.deps.json
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\bin\Debug\net5.0\HealthyDiet.Domain.dll
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\bin\Debug\net5.0\ref\HealthyDiet.Domain.dll
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\bin\Debug\net5.0\HealthyDiet.Domain.pdb
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.AssemblyInfoInputs.cache
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.AssemblyInfo.cs
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.dll
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\ref\HealthyDiet.Domain.dll
+C:\Users\Nick\Documents\GitHub\Healthy_Diet\Implementation\HealthyDietApplication\HealthyDiet.Domain\obj\Debug\net5.0\HealthyDiet.Domain.pdb

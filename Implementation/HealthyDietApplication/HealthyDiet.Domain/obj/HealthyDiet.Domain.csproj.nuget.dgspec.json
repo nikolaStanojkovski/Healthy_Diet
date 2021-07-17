@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {}
+    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
+    "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
         "projectName": "HealthyDiet.Domain",
-        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",

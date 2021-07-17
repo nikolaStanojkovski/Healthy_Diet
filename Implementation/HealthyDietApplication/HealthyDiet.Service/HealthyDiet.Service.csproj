@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HealthyDiet.Domain\HealthyDiet.Domain.csproj" />
     <ProjectReference Include="..\HealthyDiet.Repository\HealthyDiet.Repository.csproj" />
   </ItemGroup>

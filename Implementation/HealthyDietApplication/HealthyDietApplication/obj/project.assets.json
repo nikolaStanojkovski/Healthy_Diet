@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "ExcelDataReader/3.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ExcelDataReader.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -2489,6 +2498,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "ExcelDataReader": "3.6.0",
           "HealthyDiet.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.4"
@@ -2504,6 +2514,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "ExcelDataReader": "3.6.0",
           "HealthyDiet.Domain": "1.0.0",
           "HealthyDiet.Repository": "1.0.0"
         },
@@ -2517,6 +2528,29 @@
     }
   },
   "libraries": {
+    "ExcelDataReader/3.6.0": {
+      "sha512": "eXyxTwG7EEWpgQX3juZ2KcndqTqm/ydx9GXS2lUiMJU54U4h5eXdygRtVgINv0t60ezPWEb+lL7uM7Q+wm5BBA==",
+      "type": "package",
+      "path": "exceldatareader/3.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "exceldatareader.3.6.0.nupkg.sha512",
+        "exceldatareader.nuspec",
+        "lib/net20/ExcelDataReader.dll",
+        "lib/net20/ExcelDataReader.pdb",
+        "lib/net20/ExcelDataReader.xml",
+        "lib/net45/ExcelDataReader.dll",
+        "lib/net45/ExcelDataReader.pdb",
+        "lib/net45/ExcelDataReader.xml",
+        "lib/netstandard1.3/ExcelDataReader.dll",
+        "lib/netstandard1.3/ExcelDataReader.pdb",
+        "lib/netstandard1.3/ExcelDataReader.xml",
+        "lib/netstandard2.0/ExcelDataReader.dll",
+        "lib/netstandard2.0/ExcelDataReader.pdb",
+        "lib/netstandard2.0/ExcelDataReader.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -8330,6 +8364,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "ExcelDataReader >= 3.6.0",
       "HealthyDiet.Domain >= 1.0.0",
       "HealthyDiet.Repository >= 1.0.0",
       "HealthyDiet.Service >= 1.0.0",
@@ -8347,11 +8382,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDietApplication\\HealthyDietApplication.csproj",
+      "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDietApplication\\HealthyDietApplication.csproj",
       "projectName": "HealthyDietApplication",
-      "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDietApplication\\HealthyDietApplication.csproj",
+      "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDietApplication\\HealthyDietApplication.csproj",
       "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDietApplication\\obj\\",
+      "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDietApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8368,14 +8403,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
-              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
+            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
+              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
             },
-            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {
-              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj"
+            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj": {
+              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Repository\\HealthyDiet.Repository.csproj"
             },
-            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Service\\HealthyDiet.Service.csproj": {
-              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\HealthyDietApplication\\HealthyDiet.Service\\HealthyDiet.Service.csproj"
+            "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Service\\HealthyDiet.Service.csproj": {
+              "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Service\\HealthyDiet.Service.csproj"
             }
           }
         }
@@ -8390,6 +8425,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "ExcelDataReader": {
+            "target": "Package",
+            "version": "[3.6.0, )"
+          },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.4, )"

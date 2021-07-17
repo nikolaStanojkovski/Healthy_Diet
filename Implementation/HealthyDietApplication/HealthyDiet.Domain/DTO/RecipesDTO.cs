@@ -14,5 +14,9 @@ namespace HealthyDiet.Domain.DTO
         public Int64 RecipesSize { get; set; }
 
         public Int64 PageNumber { get; set; }
+
+        public Boolean AreFiltered { get; set; }
+        public Boolean AreSorted { get; set; }
+        public int SortCondition { get; set; }
     }
 }
