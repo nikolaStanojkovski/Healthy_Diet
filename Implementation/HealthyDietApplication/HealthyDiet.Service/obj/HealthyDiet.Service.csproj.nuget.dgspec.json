@@ -25,7 +25,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net50": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -36,7 +37,8 @@
         }
       },
       "frameworks": {
-        "net50": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -47,7 +49,22 @@
               "version": "[2.4.1, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -72,7 +89,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net50": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
               "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
                 "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
@@ -87,7 +105,8 @@
         }
       },
       "frameworks": {
-        "net50": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "ExcelDataReader": {
               "target": "Package",
@@ -102,7 +121,22 @@
               "version": "[5.0.4, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -127,7 +161,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net50": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
               "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj": {
                 "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Healthy_Diet\\Implementation\\HealthyDietApplication\\HealthyDiet.Domain\\HealthyDiet.Domain.csproj"
@@ -145,14 +180,30 @@
         }
       },
       "frameworks": {
-        "net50": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "ExcelDataReader": {
               "target": "Package",
               "version": "[3.6.0, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

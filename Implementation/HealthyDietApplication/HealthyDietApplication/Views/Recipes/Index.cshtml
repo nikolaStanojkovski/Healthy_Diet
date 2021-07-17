@@ -304,9 +304,22 @@
                 </li>
             }
             @{
-                for (int i = Model.PageNumber; i < ((Model.RecipesSize / 9) + 1) && (i-Model.PageNumber <= 5); i++)
+                var noPages = (Model.RecipesSize) / 9;
+                if (Model.RecipesSize % 9 != 0)
+                    noPages++;
+                var startIndex = 1;
+                var endIndex = (noPages - Model.PageNumber);
+                if (endIndex > 3)
+                    endIndex = startIndex + 4; // we have more pages to load
+                else
                 {
-                    if ((i + 1) == Model.PageNumber)
+                    endIndex = noPages;
+                    startIndex = ((int)noPages) - 4;
+                } // the limit of pages is reached
+
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    if (i == Model.PageNumber)
                     {
                         <li class="page-item mx-2"><a asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@i" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link active-green paginateLink">@i</a></li>
                     }
@@ -314,7 +327,6 @@
                     {
                         <li class="page-item mx-2"><a asp-controller="Recipes" asp-action="Index" asp-route-pageNumber="@i" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link paginateLink">@i</a></li>
                     }
-
                 }
             }
 

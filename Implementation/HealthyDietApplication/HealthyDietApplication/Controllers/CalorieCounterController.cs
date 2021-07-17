@@ -20,21 +20,25 @@ namespace HealthyDietApplication.Controllers
             this.userManager = _userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(calculatorService.GetCounterDTO());
+            HealthyDietUser user = null;
+            if (User.Identity.IsAuthenticated)
+                user = await userManager.FindByEmailAsync(User.Identity.Name);
+
+            return View(calculatorService.GetCounterDTO(user));
         }
 
         public async Task<IActionResult> TakeFromAccountAllTime()
         {
             var user = await userManager.FindByEmailAsync(User.Identity.Name);
-            return View("Index", calculatorService.GetCounterDTOWithAllUserVictuals(user.Id));
+            return View("Index", calculatorService.GetCounterDTOWithAllUserVictuals(user));
         }
 
         public async Task<IActionResult> TakeFromAccountToday()
         {
             var user = await userManager.FindByEmailAsync(User.Identity.Name);
-            return View("Index", calculatorService.GetCounterDTOWithTodayUserVictuals(user.Id));
+            return View("Index", calculatorService.GetCounterDTOWithTodayUserVictuals(user));
         }
     }
 }

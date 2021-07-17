@@ -1,5 +1,6 @@
 ﻿using HealthyDiet.Domain.Domain;
 using HealthyDiet.Domain.Domain.Subdomain;
+using HealthyDiet.Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace HealthyDiet.Domain.DTO
     {
         public List<Victual> AllVictuals { get; set; }
         public List<FoodSample> UserVictuals { get; set; }
+
+        public HealthyDietUser User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HealthyDiet.Domain.DTO;
+using HealthyDiet.Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace HealthyDiet.Service.Interface
 {
     public interface ICalculatorService
     {
-        public CalorieCounterDTO GetCounterDTO();
+        public CalorieCounterDTO GetCounterDTO(HealthyDietUser user);
 
-        public CalorieCounterDTO GetCounterDTOWithAllUserVictuals(string userId);
+        public CalorieCounterDTO GetCounterDTOWithAllUserVictuals(HealthyDietUser user);
 
-        public CalorieCounterDTO GetCounterDTOWithTodayUserVictuals(string userId);
+        public CalorieCounterDTO GetCounterDTOWithTodayUserVictuals(HealthyDietUser user);
     }
 }

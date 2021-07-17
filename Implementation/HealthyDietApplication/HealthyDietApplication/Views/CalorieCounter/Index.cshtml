@@ -28,6 +28,18 @@
         });
     }
 
+    function getAdvice(sum) {
+        var recIntake = $("#recommendedIntake").html();
+        var difference = parseFloat(recIntake) - sum;
+
+        if (difference == 0)
+            return "<span class='text-success'>Good job! You are right on point with your today's calorie intake</span>";
+        else if (difference > 0)
+            return "<span class='text-danger'>You have lower daily intake than you should! If you have no diet running currently It would a good idea to eat more.</span>";
+        else if (difference < 0)
+            return "<span class='text-danger'>You have higher daily intake than you should! Make sure you eat less because it can cause weight gain, and even worse, your health can get worse!</span>";
+    }
+
     $(document).ready(function () {
 
         // Insert victual into table
@@ -72,6 +84,7 @@
             });
 
             $("#spanCalories").html("<h1 class='lead font-weight-bold'><b>" + sum + "</b> kcal</h2>");
+            $("#spanAdvice").html(getAdvice(sum));
         });
 
     });
@@ -202,6 +215,7 @@
                                 }
                             </tbody>
                         </table>
+
                         <button onclick="clearTable(this);" type="button" class="btn btn-outline-danger mt-2 btn-block">Clear Table</button>
                     </div>
                 </div>
@@ -217,12 +231,26 @@
         </button>
     </div>
 
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            var weight = Model.User.Weight;
+            var height = Model.User.Height;
+            var age = Model.User.Age;
+            var recommendedIntake = 66.5 + (13.8 * weight) + (5 * height) / 6.8 * age;
+
+            <div class="card p-3 mb-2 mt-4">
+                <h5 class="text-center text-secondary lead font-weight-normal">Your recommended calorie intake daily is: <span class="font-weight-bold" id="recommendedIntake">@recommendedIntake</span> kcal</h5>
+            </div>
+        }
+    }
+
     <hr class="w-100 text-secondary my-4" />
 
     <div class="row mt-1">
         <div class="col-12">
             <div class="card text-center text-white" style="border-width: 3px; background-color: #8dba8d;">
-                <h2 class="card-header font-weight-normal text-center py-3"  style="border-width: 3px;">Result</h2>
+                <h2 class="card-header font-weight-normal text-center py-3" style="border-width: 3px;">Result</h2>
                 <div class="card-body">
                     <span id="spanCalories" class="my-4">
                     </span>
@@ -230,4 +258,16 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card text-center bg-light" style="border-width: 2px;">
+                <div class="card-body">
+                    <h5 id="spanAdvice" class="font-weight-bold my-4">
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

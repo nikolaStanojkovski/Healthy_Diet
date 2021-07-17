@@ -1,6 +1,7 @@
 ﻿using ExcelDataReader;
 using HealthyDiet.Domain.Domain;
 using HealthyDiet.Domain.Domain.Subdomain;
+using HealthyDiet.Domain.Domain.Subdomain.Auxiliary;
 using HealthyDiet.Domain.Enumerations;
 using HealthyDiet.Repository.Interface;
 using System;
@@ -189,11 +190,11 @@ namespace HealthyDiet.Repository
                                 PictureURL = reader.GetValue(2).ToString(),
                                 Description = reader.GetValue(3).ToString(),
                                 Intensity = Int64.Parse(reader.GetValue(4).ToString()),
-                                WeightLoss - Int64.Parse(reader.GetValue(5).ToString()),
+                                WeightLoss = Int64.Parse(reader.GetValue(5).ToString()),
                                 LengthDays = Int64.Parse(reader.GetValue(6).ToString())
                             };
 
-                            dietRepository.Create(model);
+                            dietRepository.CreateDiet(model);
                         }
                     }
                 }
@@ -205,9 +206,9 @@ namespace HealthyDiet.Repository
                 using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
                     bool firstRow = true;
-                    while (reader.Read())
+                    while (true)
                     {
-                        if (reader.GetValue(0) == null)
+                        if (!reader.Read() || reader.GetValue(0) == null)
                         { // random day fillage
                             List<Diet> unfilledDiets = dietRepository.GetAll()
                                 .Where(z => z.Days == null || !z.Days.Any()).ToList();
@@ -249,7 +250,7 @@ namespace HealthyDiet.Repository
                                 Diet = diet
                             };
 
-                            dietRepository.Create(model);
+                            dayRepository.Create(model);
                         }
                     }
                 }
@@ -263,23 +264,23 @@ namespace HealthyDiet.Repository
                     bool firstRow = true;
                     while (reader.Read())
                     {
-                        if (reader.GetValue(0) == null)
+                        if (!reader.Read() || reader.GetValue(0) == null)
                         { // random day victuals fillage
-                            List<Day> unfilledDays = dayRepository.GetAll()
+                            List<Day> unfilledDays = dayRepository.ReadAll()
                                 .Where(z => z.Victuals == null || !z.Victuals.Any()).ToList();
 
                             foreach (var day in unfilledDays)
                             {
                                 Random rnd = new Random();
                                 List<Victual> randomVictuals = victualRepository.ReadAll()
-                                    .OrderBy(x => rnd.Next()).Take(rnd.Next(1, 10)); // take random victuals with random number
+                                    .OrderBy(x => rnd.Next()).Take(rnd.Next(4, 6)).ToList(); // take random victuals with random number
 
                                 foreach(var victual in randomVictuals)
                                 {
                                     DayVictual newDayVictual = new DayVictual
                                     {
                                         Id = Guid.NewGuid(),
-                                        Quantity = rnd.Next(1, 10),
+                                        Quantity = rnd.Next(1, 5),
 
                                         VictualId = victual.Id,
                                         Victual = victual,

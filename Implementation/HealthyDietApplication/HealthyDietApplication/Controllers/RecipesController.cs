@@ -1,32 +1,50 @@
 ﻿using HealthyDiet.Domain.Domain;
+using HealthyDiet.Domain.Domain.Subdomain;
+using HealthyDiet.Domain.Domain.Subdomain.Auxiliary;
 using HealthyDiet.Domain.DTO;
 using HealthyDiet.Domain.Enumerations;
-using HealthyDiet.Service;
+using HealthyDiet.Repository;
+using HealthyDiet.Repository.Interface;
 using HealthyDiet.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HealthyDietApplication.Controllers
 {
     public class RecipesController : Controller
     {
-        private readonly IRecipeService recipeService;
-        private readonly IVictualService victualService;
+        private readonly IRepository<Victual> victualRepository;
+        private readonly IRepository<RecipeVictual> recipeVictualRepository;
+        private readonly IRepository<Day> dayRepository;
+        private readonly IRepository<DayVictual> dayVictualRepository;
+        private readonly IRecipeRepository recipeRepository;
+        private readonly IDietRepository dietRepository;
 
-        public RecipesController(IRecipeService _recipeService,
-            IVictualService _victualService)
+        private readonly IRecipeService recipeService;
+
+        public RecipesController(IRecipeRepository _recipeRepository,
+            IDietRepository _dietRepository,
+            IRepository<Victual> _victualRepository,
+            IRepository<RecipeVictual> _recipeVictualRepository,
+            IRepository<Day> _dayRepository,
+            IRepository<DayVictual> _dayVictualRepository,
+            IRecipeService _recipeService)
         {
+            this.recipeRepository = _recipeRepository;
+            this.dietRepository = _dietRepository;
+            this.victualRepository = _victualRepository;
+            this.recipeVictualRepository = _recipeVictualRepository;
+            this.dayRepository = _dayRepository;
+            this.dayVictualRepository = _dayVictualRepository;
+
             this.recipeService = _recipeService;
-            this.victualService = _victualService;
         }
 
         public IActionResult Index(Int64 pageNumber = 1, bool sorted = false, int sortCondition = 2)
         {
-            // DBDataInsertion insertion = new DBDataInsertion(recipeService, victualService);
-            // insertion.PopulateDatabaseRecipes();
+            // DBDataInsertion insertion = new DBDataInsertion(recipeRepository, dietRepository, victualRepository, recipeVictualRepository, dayRepository, dayVictualRepository);
+            // insertion.PopualteDatabase();
 
             List<Recipe> allRecipes = new List<Recipe>();
             if (sorted)

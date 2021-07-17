@@ -28,18 +28,23 @@ namespace HealthyDietApplication.Controllers
             this.userManager = _userManager;
         }
 
-        public IActionResult Index(Int64 pageNumber = 1)
+        public IActionResult Index(Int64 pageNumber = 1, bool sorted = false, int sortCondition = 2)
         {
-            // DBDataInsertion insertion = new DBDataInsertion(dietPlanService, victualService);
-            // insertion.PopulateDatabaseDietPlans();
+            List<Diet> allDiets = new List<Diet>();
+            if (sorted)
+                allDiets = dietPlanService.SortDiets(sortCondition, dietPlanService.GetAllDiets(), pageNumber);
+            else
+                allDiets = dietPlanService.GetAllDiets();
 
-            List<Diet> allDiets = dietPlanService.GetAllDiets();
             List<Diet> paginatedDiets = dietPlanService.GetPaginatedDiets(pageNumber, allDiets);
             DietPlansDTO model = new DietPlansDTO
             {
                 Diets = paginatedDiets,
                 DietsSize = allDiets.Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = false,
+                AreSorted = sorted,
+                SortCondition = sortCondition
             };
             return View(model);
         }
@@ -47,12 +52,15 @@ namespace HealthyDietApplication.Controllers
         [HttpPost]
         public IActionResult FilterDiets(Int64 dietIntensity, Int64 weightLoss, Int64 lengthDays, Int64 noCalories, Int64 pageNumber)
         {
-            List<Diet> fileteredDiets = dietPlanService.FilterDiets(dietIntensity, weightLoss, lengthDays, noCalories, pageNumber);
+            List<Diet> filteredDiets = dietPlanService.FilterDiets(dietIntensity, weightLoss, lengthDays, noCalories, pageNumber);
             DietPlansDTO model = new DietPlansDTO
             {
-                Diets = fileteredDiets,
+                Diets = filteredDiets,
                 DietsSize = dietPlanService.GetAllDiets().Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = true,
+                AreSorted = false,
+                SortCondition = 2
             };
             return View("Index", model);
         }
@@ -60,12 +68,16 @@ namespace HealthyDietApplication.Controllers
         [HttpPost]
         public IActionResult SortDiets(Int64 sortCondition, Int64 pageNumber)
         {
-            List<Diet> sortedDiets = dietPlanService.SortDiets(sortCondition, dietPlanService.GetAllDiets(), pageNumber);
+            List<Diet> sortedDiets =
+                dietPlanService.GetPaginatedDiets(pageNumber, dietPlanService.SortDiets(sortCondition, dietPlanService.GetAllDiets(), pageNumber));
             DietPlansDTO model = new DietPlansDTO
             {
                 Diets = sortedDiets,
                 DietsSize = dietPlanService.GetAllDiets().Count,
-                PageNumber = pageNumber
+                PageNumber = pageNumber,
+                AreFiltered = false,
+                AreSorted = true,
+                SortCondition = (int)sortCondition
             };
             return View("Index", model);
         }
@@ -77,7 +89,11 @@ namespace HealthyDietApplication.Controllers
             DietPlansDTO model = new DietPlansDTO
             {
                 Diets = searchedDiets,
-                DietsSize = dietPlanService.GetAllDiets().Count
+                DietsSize = dietPlanService.GetAllDiets().Count,
+                PageNumber = pageNumber,
+                AreFiltered = true,
+                AreSorted = false,
+                SortCondition = 2
             };
             return View("Index", model);
         }

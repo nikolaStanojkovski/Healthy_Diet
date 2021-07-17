@@ -23,9 +23,12 @@ namespace HealthyDietApplication
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private string _contentRootPath = "";
+
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             Configuration = configuration;
+            _contentRootPath = env.ContentRootPath;
         }
 
         public IConfiguration Configuration { get; }
@@ -33,9 +36,14 @@ namespace HealthyDietApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string conn = Configuration.GetConnectionString("DefaultConnection");
+            if (conn.Contains("%CONTENTROOTPATH%"))
+            {
+                conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
+            }
+            // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(conn));  //use conn
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<HealthyDietUser>(options => options.SignIn.RequireConfirmedAccount = true)

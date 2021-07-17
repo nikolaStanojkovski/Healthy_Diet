@@ -1,6 +1,7 @@
 ﻿using HealthyDiet.Domain.Domain;
 using HealthyDiet.Domain.Domain.Subdomain;
 using HealthyDiet.Domain.DTO;
+using HealthyDiet.Domain.Identity;
 using HealthyDiet.Repository.Interface;
 using HealthyDiet.Service.Interface;
 using System;
@@ -23,23 +24,27 @@ namespace HealthyDiet.Service.Implementation
             this.userRepository = _userRepository;
         }
 
-        public CalorieCounterDTO GetCounterDTO()
+        public CalorieCounterDTO GetCounterDTO(HealthyDietUser user)
         {
             List<Victual> allVictuals = victualRepository.ReadAll();
             List<FoodSample> userVictuals = new List<FoodSample>();
 
+            if(user != null)
+                user = userRepository.ReadUserInformation(user.Id);
+
             CalorieCounterDTO model = new CalorieCounterDTO()
             {
                 AllVictuals = allVictuals,
-                UserVictuals = userVictuals
+                UserVictuals = userVictuals,
+                User = user
             };
 
             return model;
         }
 
-        public CalorieCounterDTO GetCounterDTOWithAllUserVictuals(string userId)
+        public CalorieCounterDTO GetCounterDTOWithAllUserVictuals(HealthyDietUser user)
         {
-            var user = userRepository.ReadUserStatistics(userId);
+            user = userRepository.ReadUserStatistics(user.Id);
 
             List<Victual> allVictuals = victualRepository.ReadAll();
             List<FoodSample> userVictuals = user.Statistics.Victuals.ToList();
@@ -47,15 +52,16 @@ namespace HealthyDiet.Service.Implementation
             CalorieCounterDTO model = new CalorieCounterDTO()
             {
                 AllVictuals = allVictuals,
-                UserVictuals = userVictuals
+                UserVictuals = userVictuals,
+                User = user
             };
 
             return model;
         }
 
-        public CalorieCounterDTO GetCounterDTOWithTodayUserVictuals(string userId)
+        public CalorieCounterDTO GetCounterDTOWithTodayUserVictuals(HealthyDietUser user)
         {
-            var user = userRepository.ReadUserStatistics(userId);
+            user = userRepository.ReadUserStatistics(user.Id);
 
             List<Victual> allVictuals = victualRepository.ReadAll();
             List<FoodSample> userVictuals = user.Statistics
@@ -64,7 +70,8 @@ namespace HealthyDiet.Service.Implementation
             CalorieCounterDTO model = new CalorieCounterDTO()
             {
                 AllVictuals = allVictuals,
-                UserVictuals = userVictuals
+                UserVictuals = userVictuals,
+                User = user
             };
 
             return model;

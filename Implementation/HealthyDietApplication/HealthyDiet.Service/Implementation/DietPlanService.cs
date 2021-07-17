@@ -71,17 +71,22 @@ namespace HealthyDiet.Service.Implementation
                 dietPlans = dietPlans.Where(z => z.Days.Average(t => t.Victuals
                 .Sum(g => g.Quantity * g.Victual.NumberCalories)) <= ((double)noCalories)).ToList();
 
-            return GetPaginatedDiets(pageNumber, dietPlans);
+            return dietPlans;
         }
 
         public List<Diet> SortDiets(long sortCondition, List<Diet> sortNeeded, Int64 pageNumber)
         {
-            if (sortCondition == 1) // popularity
-                sortNeeded = sortNeeded.OrderByDescending(z => z.Diets.Count).ToList();
-            else // rating
-                sortNeeded = sortNeeded.OrderByDescending(z => z.Diets.Average(t => t.Rating)).ToList();
-
-            return GetPaginatedDiets(pageNumber, sortNeeded);
+            if (sortNeeded.Where(z => z.Diets == null || z.Diets.Count == 0).Count() == 0) // no rated diets
+            {
+                if (sortCondition == 1) // popularity
+                    sortNeeded = sortNeeded.OrderByDescending(z => z.Diets.Count).ToList();
+                else // rating
+                    sortNeeded = sortNeeded.OrderByDescending(z => z.Diets.Average(t => t.Rating)).ToList();
+            }
+            else
+                sortNeeded = dietRepository.GetAll();
+            
+            return sortNeeded;
         }
 
         public List<Diet> SearchDiets(string text, Int64 pageNumber)
@@ -109,7 +114,7 @@ namespace HealthyDiet.Service.Implementation
                 && filteredDiets.Where(t => t.Id.Equals(z.Id)).Count() == 0).ToList());
             // description
 
-            return GetPaginatedDiets(pageNumber, filteredDiets);
+            return filteredDiets;
         }
 
 
@@ -117,6 +122,26 @@ namespace HealthyDiet.Service.Implementation
         {
             return dietRepository.GetAll();
         }
+
+        public List<Diet> GetPaginatedDiets(long pageNumber, List<Diet> diets)
+        {
+            long secondOffset = pageNumber * 6;
+            long firstOffset = secondOffset - 6;
+            int pageSize = 6;
+            long checkOffset = (int)(diets.Count / 6);
+
+            if (checkOffset == 0) // first page check
+                pageSize = diets.Count;
+            else if ((checkOffset + 1) == pageNumber) // last page check
+            {
+                long lastOffset = (int)(diets.Count % firstOffset);
+                if (lastOffset < 6)
+                    pageSize = (int)lastOffset;
+            }
+
+            return diets.GetRange((int)firstOffset, pageSize);
+        }
+
 
         public Diet GetDiet(Guid? dietId)
         {
@@ -157,25 +182,6 @@ namespace HealthyDiet.Service.Implementation
             userDietRepository.Create(userDiet);
             userRepository.UpdateUser(user);
             dietRepository.UpdateDiet(diet);
-        }
-
-        public List<Diet> GetPaginatedDiets(long pageNumber, List<Diet> diets)
-        {
-            long secondOffset = pageNumber * 9;
-            long firstOffset = secondOffset - 9;
-            int pageSize = 9;
-            long checkOffset = (int)(diets.Count / 9);
-
-            if (checkOffset == 0) // first page check
-                pageSize = diets.Count;
-            else if (checkOffset == pageNumber) // last page check
-            {
-                long lastOffset = (int)(diets.Count % firstOffset);
-                if (lastOffset < 9)
-                    pageSize = (int)lastOffset;
-            }
-
-            return diets.GetRange((int)firstOffset, pageSize);
         }
     }
 }

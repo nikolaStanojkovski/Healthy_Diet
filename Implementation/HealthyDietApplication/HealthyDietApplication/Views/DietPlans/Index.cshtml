@@ -85,11 +85,11 @@
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="recipeFiltersTitle" aria-hidden="true">
+                <div class="modal fade" id="filters" tabindex="-1" role="dialog" aria-labelledby="dietFiltersTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="recipeFiltersHeader">Diet Plan Filters</h5>
+                                <h5 class="modal-title" id="dietFiltersHeader">Diet Plan Filters</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -230,14 +230,16 @@
                         <h4 class="card-title text-center">
                             @item.Name
                         </h4>
-                        @if (item.Description.Length <= 300)
+                        @if (item.Description.Length <= 220)
                         {
                             <p class="card-text text-center">@item.Description</p>
                         }
                         else
                         {
-                            <p class="card-text text-center">@item.Description.Substring(0, 300) ...</p>
+                            <p class="card-text text-center">@item.Description.Substring(0, 220) ...</p>
                         }
+                    </div>
+                    <div class="card-footer">
                         <div class="row">
                             <div class="col">
                                 <a asp-controller="DietPlans" asp-action="Details" asp-route-dietPlanId="@item.Id" class="btn btn-info btn-block font-weight-bold">View More...</a>
@@ -254,60 +256,76 @@
 <br />
 <br />
 
-<!--    Pagination   -->
-<div class="container mt-4">
-    <ul class="pagination justify-content-center">
+<!--    No pagination for filtered diet plans   -->
+@if (!Model.AreFiltered)
+{
+    <!--    Pagination   -->
+    <div class="container mt-4">
+        <ul class="pagination justify-content-center">
 
-        @if (Model.PageNumber == 1)
-        {
-            <li class="page-item prev-next disabled">
-                <a class="page-link number-alt btn-success active-green disabled" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)">
-                    <span aria-hidden="true">Previous</span>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item prev-next">
-                <a class="page-link number-alt btn-success active-green" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)">
-                    <span aria-hidden="true">Previous</span>
-                </a>
-            </li>
-        }
-        @{
-            for (int i = 0; i < (Model.DietsSize / 9) + 1; i++)
+            @if (Model.PageNumber == 1)
             {
-                if ((i + 1) == Model.PageNumber)
-                {
-                    <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(i+1)" class="page-link active-green paginateLink">@(i+1)</a></li>
-                }
+                <li class="page-item prev-next disabled">
+                    <a class="page-link number-alt btn-success active-green disabled" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item prev-next">
+                    <a class="page-link number-alt btn-success active-green" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber-1)" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+            }
+            @{
+                var noPages = (Model.DietsSize) / 6;
+                if (Model.DietsSize % 6 != 0)
+                    noPages++;
+                var startIndex = 1;
+                var endIndex = (noPages - Model.PageNumber);
+                if (endIndex > 3)
+                    endIndex = startIndex + 4; // we have more pages to load
                 else
                 {
-                    <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(i+1)" class="page-link paginateLink">@(i+1)</a></li>
+                    endIndex = noPages;
+                    startIndex = ((int)noPages) - 4;
+                } // the limit of pages is reached
+
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    if (i == Model.PageNumber)
+                    {
+                        <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@i" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link active-green paginateLink">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item mx-2"><a asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@i" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" class="page-link paginateLink">@i</a></li>
+                    }
                 }
-
             }
-        }
 
 
-        @if (Model.PageNumber == (Model.DietsSize / 9) || (Model.DietsSize / 9) == 0)
-        {
-            <li class="page-item disabled">
-                <a class="page-link number-alt btn btn-success disabled" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
-                    <span>Next</span>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link number-alt btn btn-success active-green" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
-                    <span>Next</span>
-                </a>
-            </li>
-        }
-    </ul>
-</div>
+            @if (Model.PageNumber == ((Model.DietsSize / 6) + 1) || (Model.DietsSize / 6) == 0)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link number-alt btn btn-success disabled" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
+                        <span>Next</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link number-alt btn btn-success active-green" asp-route-sorted="@Model.AreSorted" asp-route-sortCondition="@Model.SortCondition" asp-controller="DietPlans" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)">
+                        <span>Next</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}
 
 <style>
     .active-green {

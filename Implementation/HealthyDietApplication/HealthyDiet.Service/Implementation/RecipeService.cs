@@ -65,9 +65,9 @@ namespace HealthyDiet.Service.Implementation
 
         public List<Recipe> SortRecipes(long sortCondition, List<Recipe> recipes, Int64 pageNumber)
         {
-            if (sortCondition == 1) // if first is checked
+            if (sortCondition == 1) // popularity
                 recipes = recipes.OrderByDescending(z => z.TimesCooked).ToList();
-            else // if second is checked
+            else // rating
                 recipes = recipes.OrderByDescending(z => (z.FeedbackSum / z.NoFeedbacks)).ToList();
 
             return recipes;
