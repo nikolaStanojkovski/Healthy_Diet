@@ -82,6 +82,7 @@
                 var currentVictualQuantity = parseInt($(this).find('.quantityTable').html());
                 sum += (currentVictualCalories * currentVictualQuantity);
             });
+            sum = Math.round(sum * 100 + Number.EPSILON) / 100; // max 2 decimal places
 
             $("#spanCalories").html("<h1 class='lead font-weight-bold'><b>" + sum + "</b> kcal</h2>");
             $("#spanAdvice").html(getAdvice(sum));
@@ -237,13 +238,21 @@
             var weight = Model.User.Weight;
             var height = Model.User.Height;
             var age = Model.User.Age;
-            var recommendedIntake = 66.5 + (13.8 * weight) + (5 * height) / 6.8 * age;
+            var recommendedIntake = Math.Round((13.397 * weight) + (4.799 * height) - (5.677 * age) + 88.362, 2);
 
             <div class="card p-3 mb-2 mt-4">
                 <h5 class="text-center text-secondary lead font-weight-normal">Your recommended calorie intake daily is: <span class="font-weight-bold" id="recommendedIntake">@recommendedIntake</span> kcal</h5>
             </div>
         }
-    }
+        else
+        {
+            <div class="card p-3 mb-2 mt-4">
+                <h5 class="text-center text-info lead font-weight-normal"><a class="btn btn-outline-info" asp-controller="Account" asp-action="Register">Sign Up</a> or <a class="btn btn-outline-success" asp-controller="Account" asp-action="Login">Sign In</a> to see your recommended calorie intake daily.</h5>
+            </div>
+        }
+
+
+}
 
     <hr class="w-100 text-secondary my-4" />
 
@@ -263,8 +272,16 @@
         <div class="col-12">
             <div class="card text-center bg-light" style="border-width: 2px;">
                 <div class="card-body">
-                    <h5 id="spanAdvice" class="font-weight-bold my-4">
-                    </h5>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <h5 id="spanAdvice" class="font-weight-bold my-4"></h5>
+                        }
+                        else
+                        {
+                            <h5 class="text-center text-info lead font-weight-normal"><a class="btn btn-outline-info" asp-controller="Account" asp-action="Register">Sign Up</a> or <a class="btn btn-outline-success" asp-controller="Account" asp-action="Login">Sign In</a> to see your calorie intake advice.</h5>
+                        }
+                    }
                 </div>
             </div>
         </div>

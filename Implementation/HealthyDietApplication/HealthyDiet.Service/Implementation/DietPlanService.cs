@@ -145,7 +145,9 @@ namespace HealthyDiet.Service.Implementation
 
         public Diet GetDiet(Guid? dietId)
         {
-            return dietRepository.ReadDiet(dietId);
+            Diet model = dietRepository.ReadDiet(dietId);
+            model.Days = model.Days.OrderBy(z => z.Number).ToList(); // days need to be shown in an ascending order
+            return model;
         }
 
 

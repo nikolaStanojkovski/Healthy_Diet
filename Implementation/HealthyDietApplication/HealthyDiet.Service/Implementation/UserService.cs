@@ -396,6 +396,12 @@ namespace HealthyDiet.Service.Implementation
             if (model.Weight != null && !model.Weight.Equals("") && !model.Weight.Equals(0))
                 user.Weight = model.Weight;
 
+            user = userRepository.ReadUserStatistics(user.Id);
+            foreach(var waterIntake in user.Statistics.WaterIntake)
+            {
+                waterIntake.RequiredQuantity = ((user.Weight * 2.205 * 2.0) / 3.0) / 33.814; // Required water intake in litres from kilos update
+            }
+
             userRepository.UpdateUser(user);
         }
 

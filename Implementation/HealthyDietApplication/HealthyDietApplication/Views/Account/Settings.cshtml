@@ -85,7 +85,7 @@
                     <b>Age</b>
                 </div>
                 <div class="col-1">
-                    <input asp-for="Age" class="form-control" />
+                    <input type="number" min="0" asp-for="Age" class="form-control" />
                     <span asp-validation-for="Age" class="text-danger"></span>
                 </div>
                 <div class="col-1 text-left">
@@ -95,7 +95,7 @@
                     <b>Height</b>
                 </div>
                 <div class="col-1">
-                    <input asp-for="Height" class="form-control" />
+                    <input type="number" min="50" max="300" asp-for="Height" class="form-control" />
                     <span asp-validation-for="Height" class="text-danger"></span>
                 </div>
                 <div class="col-1 text-left">
@@ -105,7 +105,7 @@
                     <b>Weight</b>
                 </div>
                 <div class="col-1">
-                    <input asp-for="Weight" class="form-control" />
+                    <input type="number" min="20" asp-for="Weight" class="form-control" />
                     <span asp-validation-for="Weight" class="text-danger"></span>
                 </div>
                 <div class="col-1 text-left">
