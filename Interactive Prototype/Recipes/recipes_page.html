@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes Page - Homework 4 Interactive Prototype</title>
+
+    <!--    Bootstrap CSS Import   -->
+    <link rel="stylesheet" href="../source/css/bootstrap.css"/>
+
+    <!--    Font Awesome CSS Import   -->
+    <link rel="stylesheet" href="../source/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../source/fontawesome/css/fontawesome.min.css">
+
+    <style type="text/css">
+        body {
+            background: linear-gradient(70deg, #8fd19e, #28a745);
+            min-height: 100vh;
+        }
+        code {
+            background: #fff;
+            padding: 0.2rem;
+            border-radius: 0.2rem;
+            margin: 0 0.3rem;
+        }
+        .checked {
+            color: orange;
+        }
+        .card-body {
+            background-color: darkgreen;
+            color: white;
+        }
+        .card-header {
+            background-color: #8fd19e;
+        }
+        .number-alt {
+            background-color: darkgreen;
+            color: white;
+        }
+        .number {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!--    Navigation   -->
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark shadow-sm" style="background-color: darkgreen">
+        <div class="container">
+            <a href="../home_page.html" class="navbar-brand">
+                <span class="text-uppercase font-weight-bold">Healthy Diet</span>
+            </a>
+
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active mx-2"><a href="#" style="font-size: 18px;" class="nav-link">Recipes</a></li>
+                    <li class="nav-item mx-2"><a href="../Calorie%20Counter/calorie_counter_page.html" style="font-size: 18px;" class="nav-link">Calorie Counter</a></li>
+                    <li class="nav-item mx-2"><a href="../Diet%20Plans/diet_plans_page.html" style="font-size: 18px;" class="nav-link">Diet Plans</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--    Main Part   -->
+    <div class="container mt-3">
+        <div class="row">
+
+            <!--   Search Bar   -->
+            <div class="col-4">
+
+                <form>
+                    <div class="card card-header my-4" style="background-color: darkgreen">
+                        <img src="../source/img/logo.png" />
+                    </div>
+
+                    <div class="card my-4">
+                        <h5 class="card-header">Search</h5>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for recipes...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4">
+                        <h5 class="card-header">Number of Calories</h5>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Input the number of calories">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4">
+                        <h5 class="card-header">Preparation Time</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <select class="custom-select btn-block" aria-label="Default select example">
+                                        <option selected>Any</option>
+                                        <option>< 20 minutes</option>
+                                        <option>20 minutes</option>
+                                        <option>30 minutes</option>
+                                        <option>40 minutes</option>
+                                        <option>50 minutes</option>
+                                        <option>1 hour</option>
+                                        <option>2 hours</option>
+                                        <option>> 2 hours</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4">
+                        <h5 class="card-header">Type of Meal</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <select class="custom-select btn-block" aria-label="Default select example">
+                                        <option selected>Any</option>
+                                        <option>Breakfast</option>
+                                        <option>Brunch</option>
+                                        <option>Lunch</option>
+                                        <option>Elevenses</option>
+                                        <option>Dinner</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4">
+                    <h5 class="card-header">Diet Plan</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <select class="custom-select btn-block" aria-label="Default select example">
+                                    <option selected>None</option>
+                                    <option>Vegetarian</option>
+                                    <option>Vegan</option>
+                                    <option>Low-calorie diet</option>
+                                    <option>Low-carb diet</option>
+                                    <option>Low-fat diet</option>
+                                    <option>Intermittent fasting</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="card my-4">
+                        <h5 class="card-header">Priority</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Most Popular
+                                    </label>
+                                </div>
+                                <div class="form-check mx-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Highest Rating
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-block btn-primary font-weight-bold"
+                            style="height: 3.5%; font-size: 20px;">Search</button>
+                </form>
+            </div>
+
+            <!--    Main Recipe Items   -->
+            <div class="col-8 ml-auto mt-4">
+
+                <div class="row">
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/mini-fritetas.jpg"
+                            style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Mini Fritetas
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/burito-bowl.jpg"
+                                             style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Burito Bowl
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/tuna-salad.jpg"
+                                             style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Tuna Salad
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/bean-soup.jpg"
+                                             style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Bean Soup
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/cobb-salad.jpg"
+                                             style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Cobb Salad
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="#"><img class="card-img-top" src="../source/img/recipes/pulled-pork.jpg"
+                                             style="height: 220px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    Pulled Pork
+                                </h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus.</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="../Recipes/specific_recipe.html" class="btn btn-info btn-block">Learn More</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mt-1" style="font-size: 18px;">
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--    Pagination   -->
+                <div class="container mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link number-alt" href="#">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a href="#" class="page-link font-weight-bold">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link number font-weight-bold">2</a></li>
+                        <li class="page-item number"><a href="#" class="page-link number font-weight-bold">3</a></li>
+                        <li class="page-item number"><a href="#" class="page-link number font-weight-bold">4</a></li>
+                        <li class="page-item number"><a href="#" class="page-link number font-weight-bold">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link number-alt" href="#">
+                                <span>&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--    Footer    -->
+    <footer class="text-center text-white mt-4" style="background-color: darkgreen">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="my-3">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-pinterest"></i
+                ></a>
+            </section>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: #013220;">
+            © 2021 Copyright:
+            <a class="text-white" href="#">Healthy Diet</a>
+        </div>
+    </footer>
+
+    <!--    Bootstrap JS Imports   -->
+    <script src="../source/js/bootstrap.js"></script>
+</body>
+</html>

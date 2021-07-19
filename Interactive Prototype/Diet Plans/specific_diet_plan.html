@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Specific Diet Plan Page - Homework 4 Interactive Prototype</title>
+
+    <!--    Bootstrap CSS Import   -->
+    <link rel="stylesheet" href="../source/css/bootstrap.css"/>
+
+    <!--    Font Awesome CSS Import   -->
+    <link rel="stylesheet" href="../source/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../source/fontawesome/css/fontawesome.min.css">
+
+    <style type="text/css">
+        body {
+            background: linear-gradient(70deg, #28a745, #8fd19e);
+            min-height: 100vh;
+        }
+        code {
+            background: #fff;
+            padding: 0.2rem;
+            border-radius: 0.2rem;
+            margin: 0 0.3rem;
+        }
+        .card-body {
+            background-color: darkgreen;
+            color: white;
+        }
+        .card-header {
+            background-color: #8fd19e;
+        }
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <!--    Navigation   -->
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark shadow-sm" style="background-color: darkgreen">
+    <div class="container">
+        <a href="../home_page.html" class="navbar-brand">
+            <span class="text-uppercase font-weight-bold">Healthy Diet</span>
+        </a>
+
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-2"><a href="../Recipes/recipes_page.html" style="font-size: 18px;" class="nav-link">Recipes</a></li>
+                <li class="nav-item mx-2"><a href="../Calorie%20Counter/calorie_counter_page.html" style="font-size: 18px;" class="nav-link">Calorie Counter</a></li>
+                <li class="nav-item active mx-2"><a href="../Diet%20Plans/diet_plans_page.html" style="font-size: 18px;" class="nav-link">Diet Plans</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!--    Main Part   -->
+    <div class="container my-5 mx-auto">
+        <div class="row mx-5">
+            <div class="col mx-4 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/800x450"
+                                     style="height: 450px;"/></a>
+                    <div class="card-body">
+                        <h2 class="card-title text-center">
+                            Diet Plan
+                        </h2>
+                        <p class="card-text text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mt-1 text-center" style="font-size: 50px;">
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                </div>
+                                <div class="card my-4">
+                                    <div class="card-body" style="background-color: #8fd19e">
+                                        <ul class="list-group">
+                                            <li class="list-group-item bg-success my-1"><b>Day 1: </b>Ut enim ad minima veniam, quis nostrum exercitationem.</li>
+                                            <li class="list-group-item bg-success my-1"><b>Day 2: </b>Quis autem vel eum iure reprehenderit qui.</li>
+                                            <li class="list-group-item bg-success my-1"><b>Day 3: </b>Vel illum qui dolorem eum fugiat quo.</li>
+                                            <li class="list-group-item bg-success my-1"><b>Day 4: </b>Sed ut perspiciatis unde omnis iste natus error.</li>
+                                            <li class="list-group-item bg-success my-1"><b>Day 5: </b>Magni dolores eos qui ratione voluptatem sequi nesciunt.</li>
+                                            <li class="list-group-item bg-success my-1">
+                                                <a href="#" class="btn btn-block btn-info">More...</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card my-4">
+                                    <div class="card-body" style="background-color: #8fd19e">
+                                        <ul class="list-group">
+                                            <li class="list-group-item bg-success my-1"><b>Length: </b>3 months</li>
+                                            <li class="list-group-item bg-success my-1"><b>Weight Loss approx: </b>10-15 kg</li>
+                                            <li class="list-group-item bg-success my-1"><b>Users that used the diet: </b>520</li>
+                                            <li class="list-group-item bg-success my-1"><b>Intensity approx: </b>95%</li>
+                                            <li class="list-group-item bg-success my-1">
+                                                <a href="#" class="btn btn-block btn-info">More...</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <a href="../Diet%20Plans/diet_plans_page.html"
+                                   class="btn btn-block mt-5 text-white"
+                                   style="font-size: 35px; background-color: #c69500">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    Footer    -->
+    <footer class="text-center text-white mt-4" style="background-color: darkgreen">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="my-3">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-twitter"></i
+                ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-google"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-instagram"></i
+                ></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                ><i class="fab fa-pinterest"></i
+                ></a>
+            </section>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: #013220;">
+            © 2021 Copyright:
+            <a class="text-white" href="#">Healthy Diet</a>
+        </div>
+    </footer>
+
+    <!--    Bootstrap JS Imports   -->
+    <script src="../source/js/bootstrap.js"></script>
+
+</body>
+</html>
