@@ -5,10 +5,10 @@
 
 In a pandemic, as people's immunity declines and the organization of life becomes more difficult for every person, it's a good idea for people to have support for a better diet and thus a better and healthier lifestyle. <b>"Healthy Diet"</b> is a web application that provides that support. <br/> <br/>
 The framework used to implement the system is <b>.NET Core</b> as a back-end tool, and <b>Server-Side Razor</b> as the front-end tool. <b>HTML, CSS</b> and <b>Bootstrap</b> are used for the layout and the design of the pages, while <b>JavaScript</b> and <b>JQuery</b> are used for handling user's activities, creating the appropriate animations and sending requests to the server that enable interactive design.
-The application uses <b>SQL Server</b> as a database server, <b>Onion</b> architecture (<b>Domain, Repository, Service, Web</b> layers) as a main architectural pattern, and, <b>C#</b> as a main programming language. <br/> <br/>
+The application uses <b>SQL Server</b> as a database server, <b>Onion</b> architecture (<b>Domain, Repository, Service, Web</b> layers) as a main architectural pattern, and, <b>C#</b> as a main programming language. <br/> 
 <br/>
-The folder <b>Documentation</b> has all of the needed documentation and specification of the system, the folder <b>Interactive Prototype/b> includes the interactive prototype of the application, and the final implementation of the system is given in the folder <b>Implementation</b>.
-<br/>
+The folder <b>Documentation</b> has all of the needed documentation and specification of the system, the folder <b>Interactive Prototype</b> includes the interactive prototype of the application, and the final implementation of the system is given in the folder <b>Implementation</b>.
+<br/> <br/>
 The application has the following functionalities:
 <br/>
 - <b>Sharing recipes</b>, reviewing them in a list and an opportunity to review them in more detail, which provides information about the ingredients, the method and time of preparation, type of meal, total number of calories, as well as the average rating given by other users. It is also possible to filter them by: type of meal, number of calories, preparation time, and popularity, but also search by any text that is part of the name, description, preparation or ingredients. Recipes can also be sorted according to two criteria: rating and popularity. Each recipe has the opportunity to be rated by each user.
