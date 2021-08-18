@@ -2,6 +2,9 @@
 -----------------------------------------------------------------------------------
 ## Web Application made by Nikola Stanojkovski
 -----------------------------------------------------------------------------------
+Link: &nbsp;
+https://healthydiet.azurewebsites.net/
+-----------------------------------------------------------------------------------
 
 In a pandemic, as people's immunity declines and the organization of life becomes more difficult for every person, it's a good idea for people to have support for a better diet and thus a better and healthier lifestyle. <b>"Healthy Diet"</b> is a web application that provides that support. <br/> <br/>
 The framework used to implement the system is <b>.NET Core</b> as a back-end tool, and <b>Server-Side Razor</b> as the front-end tool. <b>HTML, CSS</b> and <b>Bootstrap</b> are used for the layout and the design of the pages, while <b>JavaScript</b> and <b>JQuery</b> are used for handling user's activities, creating the appropriate animations and sending requests to the server that enable interactive design.
